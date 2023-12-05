@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <a href="home">Home</a>
+        <a href="admin" class="active">Admin</a>
+        <a href="reservations">Reservations</a>
+    </header>
+    <div class="flash-container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert">
+            {% for message in messages %}
+            <div>{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    </div>
+    <main class="site-main">
+        <div class="main-panel">
+            <div class="panel-header">
+                <h2>Page Title Here</h2>
+            </div>
+            <hr>
+            {% block content %} {% endblock %}
+        </div>
+    </main>
+</body>
+</html>
