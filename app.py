@@ -60,9 +60,6 @@ def make_Bus_Data(fileName):
             
         return data
 
-    
-
-
 def valid_login(username: str, password: str) -> bool:
     valid = True
 
@@ -79,8 +76,9 @@ def valid_login(username: str, password: str) -> bool:
     return valid
     
 @app.route('/reservations', methods=['GET'])
-def reservation():
-    return render_template('reservations.html')
+def reservations():
+    bus_data = make_Bus_Data('reservations.txt')
+    return render_template('reservations.html', bus_data=bus_data)
 
 # start the flask app
 app.run(host=HOST)
