@@ -7,12 +7,17 @@
 {% if bus_data %}
 
 <div class="bus-info">
-    <p>Seating Chart:</p>
-    <p>X = reserved seat</p>
-    <p>O = Open seat</p>
+    <div class="panel-space">
+        <p><strong>Seating Chart:</strong></p>
+        <p>X = reserved seat</p>
+        <p>O = Open seat</p>
+    </div>
     {% for row in bus_data %}
-           <div>{{row}}</div>
+        <div>{{row}}</div>
     {% endfor %}
+    <div class="panel-space">
+        <p><strong>Total Sales: ${{total_sales}}</strong></p>
+    </div>
 </div>
 {% endif %}
 

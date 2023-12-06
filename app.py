@@ -15,6 +15,7 @@ def index():
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     bus_data = None
+    total_sales = 0
 
     if request.method == 'POST':
         username = request.form['username']
@@ -24,13 +25,13 @@ def admin():
         session['username'] = username
 
         if valid_login(username, password):
-            #bus_data = get_trip_info()
-            # replace with the bus display & cost info
             bus_data = make_Bus_Data('reservations.txt')
+            # need the calculation for total sales
+            # total_sales = get_total_sales()
             # remove on successful login
             session['username'] = None
 
-    return render_template('admin.html', bus_data=bus_data)
+    return render_template('admin.html', bus_data=bus_data, total_sales=total_sales)
 
 #make 2d array for seating chart
 
