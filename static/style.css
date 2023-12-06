@@ -37,7 +37,6 @@ body, html {
     display: flex;
     /* align-items: center; */
     justify-content: center;
-    height: calc(100% - 85px); /* leave room for navbar + padding top */
 }
 
 .main-panel {
