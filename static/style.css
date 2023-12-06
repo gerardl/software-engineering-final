@@ -5,8 +5,8 @@
 }
 
 .panel-space {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 body, html {
@@ -26,7 +26,7 @@ body, html {
 .navbar a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 8px 15px;
     display: inline-block;
 }
 
@@ -82,6 +82,16 @@ body, html {
     border-radius: 5px;
 }
 
+.bus-display {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    padding: 20px;
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+}
+
 button {
     width: 100%;
     max-width: 400px;
@@ -100,8 +110,8 @@ button:hover {
 }
 
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 5px;
+    margin: 5px;
     border: 1px solid transparent;
     border-radius: 4px;
     text-align: center;

@@ -8,32 +8,34 @@
         <p><strong>Seating Chart</strong></p>
         <p>X = reserved seat : O = open seat</p>
     </div>
-    {% for row in bus_data %}
-        <div>{{row}}</div>
-    {% endfor %}
+    <div class="bus-display">
+        {% for row in bus_data %}
+            <div>{{row}}</div>
+        {% endfor %}
+    </div>
 </div>
 <form class="reservation-form" action="{{ url_for('reservations') }}" method="post">
     <div class="input-group">
         <label for="first-name">First Name:</label>
-        <input type="text" id="first-name" name="first-name" required>
+        <input type="text" id="first-name" name="first-name" {% if session.username %}value='{{session.first_name}}'{% endif %}>
     </div>
 
     <div class="input-group">
         <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" name="last-name" required>
+        <input type="text" id="last-name" name="last-name" {% if session.username %}value='{{session.last_name}}'{% endif %}>
     </div>
 
     <div class="input-group">
         <label for="row">Choose a row</label>
         <select id="row" name="row">
-            <!-- Add options here -->
+            <option></option>
         </select>
     </div>
 
     <div class="input-group">
         <label for="seat">Choose a seat</label>
         <select id="seat" name="seat">
-            <!-- Add options here -->
+            <option></option>
         </select>
     </div>
     <button type="submit">SUBMIT</button>

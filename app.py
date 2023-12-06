@@ -75,10 +75,43 @@ def valid_login(username: str, password: str) -> bool:
     
     return valid
     
-@app.route('/reservations', methods=['GET'])
+@app.route('/reservations', methods=['GET', 'POST'])
 def reservations():
+    
+    if request.method == 'POST':
+        first_name = request.form['first-name']
+        last_name = request.form['last-name']
+        row = request.form['row']
+        seat = request.form['seat']
+        
+        if valid_reservation(first_name, last_name, row, seat):
+            # generate e-ticket and add to reservations.txt
+            # if a valid reservation
+            return redirect(url_for('reservations'))
+
     bus_data = make_Bus_Data('reservations.txt')
+
     return render_template('reservations.html', bus_data=bus_data)
+
+def valid_reservation(first_name: str, last_name: str, row: str, seat: str) -> bool:
+    valid = True
+
+    if not first_name:
+        valid = False
+        flash('First name is required.')
+    if not last_name:
+        valid = False
+        flash('Last name is required.')
+    if not row:
+        valid = False
+        flash('Row is required.')
+    if not seat:
+        valid = False
+        flash('Seat is required.')
+
+    # check if seat is already taken
+    
+    return valid
 
 # start the flask app
 app.run(host=HOST)

@@ -11,9 +11,11 @@
         <p>X = reserved seat</p>
         <p>O = Open seat</p>
     </div>
-    {% for row in bus_data %}
-        <div>{{row}}</div>
-    {% endfor %}
+    <div class="bus-display">
+        {% for row in bus_data %}
+            <div>{{row}}</div>
+        {% endfor %}
+    </div>
     <div class="panel-space">
         <p><strong>Total Sales: ${{total_sales}}</strong></p>
     </div>
