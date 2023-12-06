@@ -5,8 +5,14 @@
 {% block content %}
 
 {% if bus_data %}
+
 <div class="bus-info">
-    {{ bus_data }}
+    <p>Seating Chart:</p>
+    <p>X = reserved seat</p>
+    <p>O = Open seat</p>
+    {% for row in bus_data %}
+           <div>{{row}}</div>
+    {% endfor %}
 </div>
 {% endif %}
 

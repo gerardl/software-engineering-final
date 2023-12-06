@@ -26,11 +26,41 @@ def admin():
         if valid_login(username, password):
             #bus_data = get_trip_info()
             # replace with the bus display & cost info
-            bus_data = 'Valid login!'
+            bus_data = make_Bus_Data('reservations.txt')
             # remove on successful login
             session['username'] = None
 
     return render_template('admin.html', bus_data=bus_data)
+
+#make 2d array for seating chart
+
+def make_Bus_Data(fileName):
+    data =[
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"],
+        ["O", "O", "O", "O"]
+    ]
+
+    with open(fileName, newline='') as file:
+        for line in file:
+            x, r, c, y = line.strip().split(', ')
+            row = int(r)
+            column = int(c)
+            data[row][column] = "X"
+            
+        return data
+
+    
+
 
 def valid_login(username: str, password: str) -> bool:
     valid = True
