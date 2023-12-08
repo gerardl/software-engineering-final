@@ -36,7 +36,7 @@ def admin():
         if valid_login(username, password):
             bus_data = make_Bus_Data('reservations.txt')
             # need the calculation for total sales
-            # total_sales = get_total_sales()
+            total_sales = calc_price(bus_data)
             # remove on successful login
             session['username'] = None
 
@@ -68,6 +68,21 @@ def make_Bus_Data(fileName):
             data[row][column] = "X"
             
         return data
+    
+
+def get_cost_matrix():
+    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
+    return cost_matrix
+
+def calc_price(bus_data):
+    cost_matrix = get_cost_matrix()
+    total = 0
+    for r in range(0,12):
+        for c in range(0,4):
+            if bus_data[r][c] == 'X':
+                total = total + cost_matrix[r][c]
+    return total
+
 
 def valid_login(username: str, password: str) -> bool:
     valid = True
