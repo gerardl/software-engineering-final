@@ -111,6 +111,11 @@ def reservations():
         if valid_reservation(first_name, last_name, row, seat):
             # generate e-ticket and add to reservations.txt
             # if a valid reservation
+            valid, eticket = add_reservation(first_name, last_name, row, seat)
+            if valid:
+                flash(f'Reservation successful. Here is your e-ticket number: {eticket}')
+            else:
+                flash('Seat is taken, please pick again.')
             return redirect(url_for('reservations'))
 
     bus_data = make_Bus_Data('reservations.txt')
@@ -136,6 +141,29 @@ def valid_reservation(first_name: str, last_name: str, row: str, seat: str) -> b
     # check if seat is already taken
     
     return valid
+
+def add_reservation(first_name: str, last_name: str, row: str, seat: str) -> (bool, str):
+    try:
+        data = make_Bus_Data('reservations.txt')
+
+        row = int(row)
+        seat = int(seat)
+
+        # seat taken
+        if data[row][seat] == "X":
+            return False, ''
+
+        # Truman, 1, 0, TIrNuFmOaTnC4320
+        # generate e-ticket number by mixing first name with INFOTC4320
+        e_ticket = ''.join([first_name[i] + 'I' + 'N' + 'F' + 'O' + 'T' + 'C' + '4' + '3' + '2' + '0' for i in range(len(first_name))])
+
+        # add reservation to file
+        with open('reservations.txt', 'a') as file:
+            file.write(f'{first_name}, {row}, {seat}, {e_ticket}\n')
+        
+        return True, e_ticket
+    except Exception as e:
+        raise Exception(f'Error adding reservation: {e}')
 
 # start the flask app
 app.run(host=HOST)
