@@ -129,12 +129,6 @@ select {
     border-color: #3457cb;
 }
 
-/* Style for disabled select box */
-.select-group select:disabled {
-    background-color: #eee;
-    color: #999;
-}
-
 .alert {
     padding: 5px;
     margin: 5px;
