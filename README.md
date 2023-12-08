@@ -1,5 +1,7 @@
 # Software Engineering Final Project
 
+![Site Example](final-example.png)
+
 for INFOTC-4320-01 2023FS by scrum team 2: Alex Franklin, James Keating, Gerard Lucas, Tom O'Keefe, Jacob Timlin
 
 ### To Install Dependencies Locally
