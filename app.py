@@ -155,7 +155,14 @@ def add_reservation(first_name: str, last_name: str, row: str, seat: str) -> (bo
 
         # Truman, 1, 0, TIrNuFmOaTnC4320
         # generate e-ticket number by mixing first name with INFOTC4320
-        e_ticket = ''.join([first_name[i] + 'I' + 'N' + 'F' + 'O' + 'T' + 'C' + '4' + '3' + '2' + '0' for i in range(len(first_name))])
+        # if the name is shorter than 10 characters, pad with INFOTC4320
+        e_ticket = ''
+        control = 'INFOTC4320'
+        for i in range(0, len(control)):
+            if len(first_name) <= i:
+                e_ticket += control[i]
+            else:
+                e_ticket += first_name[i] + control[i]
 
         # add reservation to file
         with open('reservations.txt', 'a') as file:
