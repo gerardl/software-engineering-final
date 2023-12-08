@@ -167,6 +167,11 @@ def add_reservation(first_name: str, last_name: str, row: str, seat: str) -> (bo
         row = int(row)
         seat = int(seat)
 
+        if row < 0 or row > 11:
+            raise Exception('This is not a valid row number, try again.')
+        if seat < 0 or seat > 3:
+            raise Exception('This is not a valid seat number, try again.')
+
         # seat taken
         if data[row][seat] == "X":
             return False, ''
