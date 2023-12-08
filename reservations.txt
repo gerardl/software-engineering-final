@@ -7,9 +7,3 @@ Janae, 5, 1, JIaNnFaOeTC4320
 Cyd, 8, 2, CIyNdFOTC4320
 Frank, 9, 3, FIrNaFnOkTC4320
 Truman, 1, 0, TIrNuFmOaTnC4320
-Gerard, 1, 1, GIeNrFaOrTdC4320
-Gerard, 0, 0, GIeNrFaOrTdC4320
-Gerard, 0, 3, GIeNrFaOrTdC4320
-TEST, 1, 2, TIENSFTOTC4320
-asdfasdfasdfasdf, 11, 0, aIsNdFfOaTsCd4f3a2s0
-asdf, 7, 2, aIsNdFfOTC4320

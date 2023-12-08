@@ -27,18 +27,22 @@ def admin():
     total_sales = 0
 
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        # we can at least repopulate the username
-        # on failed login attempt
-        session['username'] = username
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            # we can at least repopulate the username
+            # on failed login attempt
+            session['username'] = username
 
-        if valid_login(username, password):
-            bus_data = make_Bus_Data('reservations.txt')
-            # need the calculation for total sales
-            total_sales = calc_price(bus_data)
-            # remove on successful login
-            session['username'] = None
+            if valid_login(username, password):
+                bus_data = make_Bus_Data('reservations.txt')
+                # need the calculation for total sales
+                total_sales = calc_price(bus_data)
+                # remove on successful login
+                session['username'] = None
+        except Exception as e:
+            flash(str(e), 'danger')
+            return redirect(url_for('index'))
 
     return render_template('admin.html', bus_data=bus_data, total_sales=total_sales)
 
@@ -112,17 +116,21 @@ def reservations():
         session['last_name'] = last_name
 
         if valid_reservation(first_name, last_name, row, seat):
-            # generate e-ticket and add to reservations.txt
-            # if a valid reservation
-            valid, eticket = add_reservation(first_name, last_name, row, seat)
-            if valid:
-                flash(f'Congratulations {first_name}! Row: {row}, Seat: {seat} is now reserved for you. Enjoy your trip!', 'success')
-                flash(f'Your eticket number is: {eticket}')
-                session['first_name'] = None
-                session['last_name'] = None
-            else:
-                flash('Seat is taken, please pick again.', 'danger')
-            return redirect(url_for('reservations'))
+            try:
+                # generate e-ticket and add to reservations.txt
+                # if a valid reservation
+                valid, eticket = add_reservation(first_name, last_name, row, seat)
+                if valid:
+                    flash(f'Congratulations {first_name}! Row: {row}, Seat: {seat} is now reserved for you. Enjoy your trip!', 'success')
+                    flash(f'Your eticket number is: {eticket}')
+                    session['first_name'] = None
+                    session['last_name'] = None
+                else:
+                    flash('Seat is taken, please pick again.', 'danger')
+                return redirect(url_for('reservations'))
+            except Exception as e:
+                flash(str(e), 'danger')
+                return redirect(url_for('reservations'))
 
     bus_data = make_Bus_Data('reservations.txt')
 
@@ -159,9 +167,13 @@ def add_reservation(first_name: str, last_name: str, row: str, seat: str) -> (bo
         if data[row][seat] == "X":
             return False, ''
 
-        # Truman, 1, 0, TIrNuFmOaTnC4320
-        # generate e-ticket number by mixing first name with INFOTC4320
-        # if the name is shorter than 10 characters, pad with INFOTC4320
+        # generate e-ticket number by alternating first name characters with INFOTC4320
+        # we could loop through the longer of the two strings, but the name could
+        # make the e-ticket too long, so we'll just loop through infotc4320
+        # this could make 2 e-tickets the same with 2 of the same first names,
+        # but I'm guessing we aren't worried about that in this case.
+        #---------
+        # example record: Truman, 1, 0, TIrNuFmOaTnC4320
         e_ticket = ''
         control = 'INFOTC4320'
         for i in range(0, len(control)):
