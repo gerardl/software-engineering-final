@@ -3,5 +3,18 @@
 {% set page_title = "IT-4320 Trip Reservation System" %}
 
 {% block content %}
-Welcome to the IT-4320 reservation system. Use the select box to choose wheter to make a reservation or log in as the administrator.
+<div id="index-panel">
+    Welcome to the IT-4320 reservation system. Use the select box to choose wheter to make a reservation or log in as the administrator.
+    <form class="menu-form" action="{{ url_for('index') }}" method="post">
+        <div class="input-group">
+            <label for="menu">Choose Menu Option:</label>
+            <select id="menu" name="menu">
+                <option>Choose an Option</option>
+                <option value="admin">Admin Login</option>
+                <option value="reservations">Reserve a Seat</option>
+            </select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 {% endblock %}

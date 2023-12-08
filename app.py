@@ -8,8 +8,17 @@ app.config["DEBUG"] = True
 app.config['SECRET_KEY'] = 'your secret key'
 auth = Authentication('passcodes.txt')
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        # selection
+        choice = request.form['menu']
+        if(choice  == 'admin'):
+            return redirect(url_for('admin'))
+        elif(choice == 'reservations'):
+            return redirect(url_for('reservations'))
+        else:
+            flash("invalid option")
     return render_template('index.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
