@@ -121,6 +121,10 @@ def reservations():
                 # if a valid reservation
                 valid, eticket = add_reservation(first_name, last_name, row, seat)
                 if valid:
+                    # increment row and seat for display
+                    # since we are using the 0-based index
+                    row = int(row) + 1
+                    seat = int(seat) + 1
                     flash(f'Congratulations {first_name}! Row: {row}, Seat: {seat} is now reserved for you. Enjoy your trip!', 'success')
                     flash(f'Your eticket number is: {eticket}')
                     session['first_name'] = None
