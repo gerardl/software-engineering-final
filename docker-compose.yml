@@ -7,7 +7,7 @@ services:
     image: trip-reservation-system
     container_name: trip-reservation-system
     ports:
-      - "5005:5000"
+      - "5003:5000"
     volumes:
       - .:/app
     environment:

@@ -14,7 +14,6 @@ body, html {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     color: #333;
-    line-height: 1.4;
 }
 
 .navbar {
@@ -44,12 +43,16 @@ body, html {
     justify-content: center;
 }
 
+.menu-form, .login-form, .reservation-form {
+    margin-top: 20px;
+}
+
 .main-panel {
     margin-top: 20px;
     width: 100%;
     max-width: 1000px;
     background: #fff;
-    padding: 25px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 }
@@ -139,6 +142,15 @@ select {
     border-radius: 4px;
     text-align: center;
     font-size: 16px;
+}
+
+.alert:has(> div.success) {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert:has(> div.danger) {
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;

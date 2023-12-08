@@ -17,12 +17,12 @@
 <form class="reservation-form" action="{{ url_for('reservations') }}" method="post">
     <div class="input-group">
         <label for="first-name">First Name:</label>
-        <input type="text" id="first-name" name="first-name" {% if session.username %}value='{{session.first_name}}'{% endif %}>
+        <input type="text" id="first-name" name="first-name" {% if session.first_name %}value='{{session.first_name}}'{% endif %}>
     </div>
 
     <div class="input-group">
         <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" name="last-name" {% if session.username %}value='{{session.last_name}}'{% endif %}>
+        <input type="text" id="last-name" name="last-name" {% if session.last_name %}value='{{session.last_name}}'{% endif %}>
     </div>
 
     <div class="input-group">
