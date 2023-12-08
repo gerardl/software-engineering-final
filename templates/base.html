@@ -13,11 +13,11 @@
         <a href="/reservations" class="{{'active' if active_page == "reservations" else '' }}">Reservations</a>
     </header>
     <div class="flash-container">
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <div class="alert">
-            {% for message in messages %}
-            <div>{{ message }}</div>
+            {% for category, message in messages %}
+            <div class="{{category}}">{{ message }}</div>
             {% endfor %}
         </div>
         {% endif %}

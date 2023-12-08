@@ -18,7 +18,7 @@ def index():
         elif(choice == 'reservations'):
             return redirect(url_for('reservations'))
         else:
-            flash("invalid option")
+            flash("invalid option", 'danger')
     return render_template('index.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -89,13 +89,13 @@ def valid_login(username: str, password: str) -> bool:
 
     if not username:
         valid = False
-        flash('Username is required.')
+        flash('Username is required.', 'danger')
     if not password:
         valid = False
-        flash('Password is required.')
+        flash('Password is required.', 'danger')
     if valid and not auth.login(username, password):
         valid = False
-        flash('Invalid username/password combination.')
+        flash('Invalid username/password combination.', 'danger')
     
     return valid
     
@@ -108,14 +108,20 @@ def reservations():
         row = request.form['row']
         seat = request.form['seat']
         
+        session['first_name'] = first_name
+        session['last_name'] = last_name
+
         if valid_reservation(first_name, last_name, row, seat):
             # generate e-ticket and add to reservations.txt
             # if a valid reservation
             valid, eticket = add_reservation(first_name, last_name, row, seat)
             if valid:
-                flash(f'Reservation successful. Here is your e-ticket number: {eticket}')
+                flash(f'Congratulations {first_name}! Row: {row}, Seat: {seat} is now reserved for you. Enjoy your trip!', 'success')
+                flash(f'Your eticket number is: {eticket}')
+                session['first_name'] = None
+                session['last_name'] = None
             else:
-                flash('Seat is taken, please pick again.')
+                flash('Seat is taken, please pick again.', 'danger')
             return redirect(url_for('reservations'))
 
     bus_data = make_Bus_Data('reservations.txt')
@@ -127,16 +133,16 @@ def valid_reservation(first_name: str, last_name: str, row: str, seat: str) -> b
 
     if not first_name:
         valid = False
-        flash('First name is required.')
+        flash('First name is required.', 'danger')
     if not last_name:
         valid = False
-        flash('Last name is required.')
+        flash('Last name is required.', 'danger')
     if not row:
         valid = False
-        flash('Row is required.')
+        flash('Row is required.', 'danger')
     if not seat:
         valid = False
-        flash('Seat is required.')
+        flash('Seat is required.', 'danger')
 
     # check if seat is already taken
     
