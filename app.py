@@ -131,7 +131,7 @@ def reservations():
                     session['last_name'] = None
                 else:
                     flash('Seat is taken, please pick again.', 'danger')
-                return redirect(url_for('reservations'))
+                    return redirect(url_for('reservations'))
             except Exception as e:
                 flash(str(e), 'danger')
                 return redirect(url_for('reservations'))
